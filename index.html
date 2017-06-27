@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="test">
+
+<head>
+    <meta charset="utf-8" />
+    <title> Arun Test</title>
+
+    <link  rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="angular.min.js"></script>
+
+
+</head>
+
+<body class="test-background-image">
+<link  rel="stylesheet" href="assests/members.css"/>
+
+<script src="app.js"></script>
+<script src="assests/members-controller.js"></script>
+<script src="assests/members-service.js"></script>
+
+
+
+<div class="container" ng-controller="mainController">
+    <h1 class="text-center" data-ng-bind="value"></h1>
+    <div class="row test-padding-input">
+            <input type="text" class="form-control"  data-ng-model="members.searchText" placeholder="Search ...">
+    </div>
+
+
+    <div data-ng-if="members.result" class="row">
+        <div class="col-xs-8 test-border-table">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Occupation</th>
+                    <th>Company</th>
+                </tr>
+                </thead>
+                <tbody>
+
+               <!-- filter for only names we can replace it by | filter :{firstName:members.searchText} check for only firstname
+                filter for three fields we can replace it by | filter :{firstName:members.searchText,occupation:members.searchText,company:members.searchText }&#45;&#45;&ndash;&gt; check for all the three(&)-->
+
+
+                <tr data-ng-repeat="member in members.result | filter: members.searchText" data-ng-click="selectedRow(member)" data-ng-class="{'selected': member.id == members.selected.id}">
+
+                    <td data-ng-bind="member.firstName"></td>
+                    <td data-ng-bind="member.occupation"></td>
+                    <td data-ng-bind="member.company"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-xs-4 test-padding-left test-border-table">
+            <h3 data-ng-bind="members.selected.surname +'  '+ members.selected.firstName"></h3>
+            <div>
+                <img src="{{members.selected.portrait}}">
+            </div>
+            <div><span class="test-selected-member-title"> Gender: &nbsp;&nbsp;</span><span class="test-selected-member-text" data-ng-bind="members.selected.gender"> </span></div>
+            <div><span class="test-selected-member-title">Address: &nbsp;&nbsp; </span><span class="test-selected-member-text">
+            <span data-ng-bind="members.selected.streetAddress"></span>,<span data-ng-bind="members.selected.city"></span>,<span data-ng-bind="members.selected.state"></span>,
+            <span data-ng-bind="members.selected.zipCode"></span>,<span data-ng-bind="members.selected.country"></span></span>.</div>
+            <div><span class="test-selected-member-title">Email:&nbsp;&nbsp; </span><span class="test-selected-member-text" data-ng-bind="members.selected.email"> </span></div>
+            <div><span class="test-selected-member-title"> Username:&nbsp;&nbsp;</span><span class="test-selected-member-text" data-ng-bind="members.selected.username"> </span></div>
+            <div><span class="test-selected-member-title"> Birthday :&nbsp;&nbsp;</span><span class="test-selected-member-text" data-ng-bind="members.selected.birthday"></span></div>
+            <div><span class="test-selected-member-title"> Occupation :&nbsp;&nbsp; </span><span class="test-selected-member-text" data-ng-bind="members.selected.occupation"></span></div>
+            <div><span class="test-selected-member-title"> Company:&nbsp;&nbsp;</span><span class="test-selected-member-text" data-ng-bind="members.selected.company"> </span></div>
+            <div><span class="test-selected-member-title">Latitude:&nbsp;&nbsp; </span><span class="test-selected-member-text" data-ng-bind="members.selected.latitude"> </span></div>
+            <div><span class="test-selected-member-title"> Longitude:&nbsp;&nbsp;</span><span class="test-selected-member-text" data-ng-bind="members.selected.longitude"> </span></div>
+            <div><span class="test-selected-member-title"> Motto:&nbsp;&nbsp;</span><span class="test-selected-member-text" data-ng-bind="members.selected.motto"> </span></div>
+            <!--<pre data-ng-bind="members.selected | json "></pre>-->
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>
